@@ -1,0 +1,14 @@
+Definiçao de diretorio
+
+Grafo acíclico
+    soft e hard link
+
+Alocação de blocos
+    alocação encadeada - se eu perco o 5 eu perco o resto
+
+Fat na prova ele dá um atabel a e fala para representar 
+
+Inode a primera azul é de indie
+ 
+ ufs
+ organização de diretorios
