@@ -1,0 +1,9 @@
+sockets - umam enaiera de comunicação ineterprocessos que usa as postar para se comunicar
+
+vai ter pipes na prova
+pipes é um metodo de comunicação tipo caixa de correio
+    depoista a mensagem na caixa de correio e eeu leio a hora que eu quiser, uma comunicação indireta 
+
+processo n~ao compartilha dados
+    para isso eu precisso criar uma se~çao na memoria ram devemos criar algo para deixar a memoria compartilhada, memoria compartilhada tem uma mescanismo de senha com tolkirn par os porcessos que tere essa senha possa assessar
+    Dois mecanismo principais: 

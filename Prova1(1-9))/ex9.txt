@@ -1,0 +1,7 @@
+9) Explique com suas próprias palavras a frase:
+
+ " A técnica de multiprogramação possibilita aumentar a utilização da CPU."
+
+ Reposta:
+    Essa tecnica permite que varios provesos fiquem prontos para ser porcessados pela cpu, assim a mesma não fica ociosa. então quando um processoa
+    cacava de ser executado outro já está pronto para ser executado

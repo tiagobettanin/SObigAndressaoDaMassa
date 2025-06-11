@@ -1,0 +1,12 @@
+MEmoria compartilhada
+
+Para um procs assessar serta regial precisa de um tolkien para isso com ponteiro
+
+    O tolkien cria o ponteiro para vincular 
+    area comun para o proceso trocar dado livremente
+    Pode ser necessario gestão
+
+problemas: gestão de corrida(dempednedo d ahora resultados diiferentse), dead lock (algum processo assessa e trava o restantee)
+
+
+!!!!!!!!!!!!!!!!!!!!!não usra n-map, usar system five 

@@ -1,0 +1,20 @@
+produtor x consumidor
+depende de quem executa primeiro , codição de corrida = a ordem de execução de processos depende de quem inicnia
+
+ operaçẽos atomica = determinaão atomicidade (começa a extura  e termina sem niguem poder interromper o porcesso)
+
+
+fregião critica = regiião once cocorre o assess as variares comparitnhladas (codigo), tem que haversincornização com operaçoes atomica(bloquei a aregão critica  edesbroquei apos o uso)]
+
+tecnicas de bloquei
+esse bloqueir normlamente é por hardare mas pode ser por softwaree
+NAÕ
+petenso nãon tem garantia que funcione
+hardware não é todos que tem 
+SIM
+semaforo binario e não binario
+
+
+
+
+solução de peterçon

@@ -1,0 +1,204 @@
+10) Sobre processos, explique:
+
+    a) o que é um processo?
+
+    b) qual a diferença entre processos e threads?
+
+    c) explique detalhadamente o porque que processos não compartilham dados.
+
+    d) como os processos são criados em um sistem baseado em linux?
+
+    e) Sobre a posix, o que o comando  execv("") faz?
+
+a-
+    Processo é um programa em execução, composto por pilhas na memorai, aruqivos, podendo haver therads
+
+b-
+    processo possui daos privados e tem um custo maior para serem feitos, as pilhas dos processos não são comparitlhadas e inicialmente não se 
+    comunicão entre sim apenas por pipe, são isolados (plhas codigos aurquivos)
+
+    threads são unidades em execução compostos por entre outras coisas por pilhas que são comparitlhadas e se comunicão entre si
+
+c-
+    Porcessos não comparitlham dados pq abstração e isolamentos de dados, onde é possivel um maior niel de estabildiade segurança e controle 
+    dos dados necessarios para o processo
+
+d-  
+    O primeito porcessos que não são criados pelo ususario é criado primeira mente pelo SO, apos isso cada porcesso pode criar mais porcessos se 
+    for necessarios
+    Porem o usuario tambem pode criar porcessos na Linux é utilizado a biblioteca POSIX, por exempolo o comando fork cria um pik que sendo p>0
+    é o porcesso filho e sendo p=0 eh o processo pai
+
+e- 
+
+
+   (0,5) O que é um processo? Processos compartilham dados? Por que? (Dica: explique do ponto de vista do endereçamento em memória)
+
+    (0,5) Qual a diferença entre processos e threads? thereads compartilham dados? Explique fundamentando seus argumentos
+
+    (0,5) Quais são os estados de um processo dentro de um sistema operacional?  Para que serve um escalonador 
+    de processo de curto prazo? Quais mudanças de estados de um processo este tipo de escalonador faz? Dê exemplo
+     de políticas de escalonamento de curto prazo.
+
+    (0,5) Sobre a posix, o que o comando  execv("") faz?  Como o exec permite que um processo filho execute um código diferente do processo pai? Explique sua importância e dê exemplo de funcionamento (código).
+
+Texto de resposta Questão 4
+
+a-
+     Processo é um programa em execução, composto por pilhas na memorai, aruqivos, podendo haver therads
+    Porcessos não comparitlham dados por causa de  isolamentos de dados, onde é possivel um maior niel de estabildiade segurança e controle 
+    dos dados necessarios para o processo
+
+b-
+    Processo possui dados privados e tem um custo maior para serem feitos, as pilhas dos processos não são comparitlhadas e inicialmente não se 
+    comunicão entre sim apenas por pipe, são isolados (pilhas, codigos, aurquivos). Threads são unidades em execução compostos por entre outras coisas por pilhas que são comparitlhadas e se comunicão entre si
+
+c- 
+     Eles podem estar em execução, esperndo e pronto.
+    Escadores de curto prazo são quem escolhe os processos para serem executados pela cpu, dependendo da politica de escalonamento implementada
+    Ele muda o processo de pronto(pronto para se executado)  para ser executado pela cpu
+    São exempolos:
+        First-Come First-Served (FCFS)
+        Shortest Job First Prioridade
+        Estática Prioridade Dinâmica
+        Round-Robin
+        Fila Multinível
+        e etc
+
+d-
+    O comando execv substutui o processo atual por um novo e mantem o pid, se nada falhar o restante do codigo não será executado 
+    #include<stdio.h>
+#include<unistd.h>
+#include<sys/wait.h>
+
+int main(void){
+    int pid = fork();
+    int x = 10;
+    
+    if( pid > 0){
+        x=x+10;
+        printf("Sou pai e o valor de x eh: %d\n", x);
+        wait(NULL);
+    }else if(  pid == 0){
+        execl("/bin/ps", "ps", "-l", NULL);
+        printf("Sou filho e o valor de x eh: %d\n", x);
+
+    }
+    
+    
+    return 0;
+}
+
+
+void ctrlc( int signum){
+    contador++;
+    if(contador==3){
+        char opcao;
+
+        write(1, "\nRealmente deseja sair? [Y/n]: ", myLen("Realmente deseja sair? [Y/n]: "));
+        alarm(20);
+        read(1, &opcao, char(opcao));
+
+        if( opcao == 'y' ||opcao == 'Y'){
+            exit(0);
+        }else if(opcao == 'n' ||opcao == 'N'){
+            contador=0;
+            alarm(0);
+            write(1, "Continuando...\n", myLen("Continuando...\n"));
+        }
+    }
+
+
+}
+
+(2,5) O sinal SIGQUIT é utilizado para indicar a finalização forçada de um processo, e pode ser enviado via teclado, geralmente utilizando a combinação Ctrl-\. Com base nisso, implemente um programa que execute um loop infinito até que o sinal SIGQUIT seja recebido.
+
+Ao receber o sinal:
+
+   Inicie uma contagem de 2 segundos utilizando a função alarm(segundos);  
+
+   Após esse tempo, exiba uma mensagem na saída padrão (utilizando a função write) informando que o programa está sendo encerrado;
+
+   Encerre a execução do programa com a função exit.
+
+  Para a implementação:
+
+  (1,0) Utilize a função signal(SINAL, handler)  para registrar os manipuladores dos sinais.
+
+  (1,0) Use alarm(segundos) para configurar o alarme de 2 segundos. O tratamento dos sinais deve ser feito por funções específicas (handlers) que você irá definir.
+
+  (0,5) Comente o código apresentado, relacionando cada parte da implementação com os conceitos de comunicação entre processos. Explique detalhadamente o papel e o funcionamento dos principais comandos e funções utilizados, destacando como eles contribuem para a comunicação.
+  (2,5) Com base na API POSIX, implemente um programa em linguagem C que realize a criação de um novo processo utilizando fork(). Após a criação:
+
+(0,5) O processo filho deverá apresentar ao usuário duas opções:
+
+	Opção 1: Entrar em um loop infinito.
+
+	Opção 2: Encerrar-se normalmente com código de saída 0.
+
+(1,0) O processo pai deverá aguardar o término do filho e, ao final, informar ao usuário se:
+
+	O processo filho terminou normalmente, ou
+
+	O processo filho foi interrompido por um sinal (morte abrupta).
+
+(0,5) Para realizar este exercício, utilize obrigatoriamente as seguintes chamadas do POSIX:
+
+	fork() — para criar o processo filho;
+
+	read(int fd, void *buf, size_t count) — para ler a escolha do usuário (use o descritor STDIN_FILENO);
+
+	write(int fd, const void *buf, size_t count) — para imprimir mensagens na tela (use o descritor STDOUT_FILENO);
+
+	wait(int *status) — para o processo pai aguardar o término do filho;
+
+	WIFEXITED(status) — para verificar se o filho encerrou normalmente;
+
+	WIFSIGNALED(status) — para verificar se o filho foi morto por um sinal.
+
+Instruções adicionais:
+
+	Implemente o programa de forma que os fluxos de execução de pai e filho estejam claramente definidos.
+
+	(0,5) Comente o código explicando o papel de cada função, especialmente no contexto de criação e finalização de processos, e no uso de sinais e status de término.Certifique-se de que a leitura do teclado seja tratada de forma simples (por exemplo, usando leitura de um caractere para selecionar a opção).
+
+Texto de resposta Questão 2
+
+(2,0) Calcule o tempo médio de resposta e o tempo médio  de espera do sistema considerando o algoritmo Round Robin com quantum = 5. 
+
+             Processo                         Tempo de CPU                         Arrival  Time 
+
+                   A   		                       17     			               2                       
+
+                   B	                                      20    			                       3
+
+                   C	                                       4                                              9
+
+                   D	                                      12             	                               0
+
+(1,0) Calcule o tempo médio de resposta e o tempo médio  de espera do sistema
+
+(1,0) Construa a linha do tempo (como visto em aula)
+(2,0)  Para as questões a seguir, utilize respostas claras e objetivas que não apenas demonstram um entendimento sólido do material, mas também facilitam a avaliação precisa do seu desempenho. Para isso:
+
+1. Leia cuidadosamente a pergunta: Certifique-se de compreender completamente o que está sendo perguntado antes de responder.
+
+2. Seja conciso: Evite divagações e vá direto ao ponto. Responda à pergunta de forma direta e sucinta.
+
+3. Forneça evidências: Se a pergunta solicitar exemplos ou justificações, inclua evidências relevantes para apoiar sua resposta.
+
+4. Revise e clarifique: Antes de enviar sua resposta, revise-a para garantir que ela seja clara e não deixe espaço para interpretações diferentes.
+
+
+
+Peça esclarecimentos, se necessário: Se a pergunta não estiver clara para você, não hesite em pedir esclarecimentos ao professor.  Sobre processos, explique:
+
+    (0,5) O que é um processo? Processos compartilham dados? Por que? (Dica: explique do ponto de vista do endereçamento em memória)
+
+    (0,5) Qual a diferença entre processos e threads? thereads compartilham dados? Explique fundamentando seus argumentos
+
+    (0,5) Quais são os estados de um processo dentro de um sistema operacional?  Para que serve um escalonador de processo de curto prazo? Quais mudanças de estados de um processo este tipo de escalonador faz? Dê exemplo de políticas de escalonamento de curto prazo.
+
+    (0,5) Sobre a posix, o que o comando  execv("") faz?  Como o exec permite que um processo filho execute um código diferente do processo pai? Explique sua importância e dê exemplo de funcionamento (código).
+
+Texto de resposta Questão 4

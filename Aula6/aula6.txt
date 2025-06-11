@@ -1,0 +1,21 @@
+quando vc maximisa o tmepo da cpu vc maximisa a vasão e o tmpo de resposta
+
+prenpitivo
+
+o processo não volta do começo com multiprogramaçção por conta do contexto do processo(conjutno de infos que permite voltar de onde parou)
+
+
+filas (estados de execução de um processo)
+
+escalonadores de curto prazo, escolher o processo para executar(a escolha depende da politica de alocação de processo)
+
+vai cair de fazer teste de mesa para politicas de escalonadores de prazo curto
+
+sjf - menor trabalho é atendido primeiro
+
+vai cair tabela de sjf apporixmaxion - fazer tabela depois simulaçõ
+
+pi da tabela é o pi/ da formula
+a tabel atem que completar os pi 1>, ele dá o pi0 e os teste
+oq está em azul pe para descobrir
+

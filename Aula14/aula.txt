@@ -1,0 +1,14 @@
+diferença de codigo obejto e executabel - 
+
+alocaçao de memoria: segmekntaçãol fragmentação
+fragmentação externa é gerada por segmekntação
+
+pagnaç~çao resolve a fragmentação externa, os processos ficam todos com o mesmo tamnho, fragmentação interna é quando sobra espaço nessas lacunas
+da paginação
+
+mmu pega o endereço logico e mukda para endereço fisico, tlb tabela de locação para fretne
+
+
+frames é a fisica paginas é a virutal - frmaes são fixisos mas a paginha pode estar em difetnees frames (frames são garagens e paginas são carros)
+
+      

@@ -1,0 +1,19 @@
+proceso = programa em execução
+
+codigo obejeto e codigo executavel (qual a diferença)
+
+
+
+quem executa as nistruções são as treads, o porcesso é o conjjunto (expaso de endereçãmento, threads), processo é ativo esta em execução
+
+procsso não precisa necessariamente em execução, pode estár em esprea(de algum dado etc), bloqueado. ele pode ser considerado em estado quando esta em execução
+
+threads tem tipos
+
+oq o loader faz
+
+
+o mairo custo é para fazre a pilha de alocação (aqulea do rips qu etem invertida)]]
+
+prempçao, são sistemas operacionais que são capazes de interroper um processo
+

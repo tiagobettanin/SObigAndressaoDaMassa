@@ -1,0 +1,27 @@
+so prenpitivos (capazes de interroper a execuçõa de um processo)
+
+therads tem qual relação com os processos
+
+time sharing (divide uma fatia de tempo para todos os processos e da uma impressão que estão todos sendo rodados ao memsmo tempo)
+
+enquatno o processo não estã sendo executato o so salva algumas infos necessarias não todas (program counter, memorioa, dados estaticos presentes na memroai)
+
+pCB, process control block
+
+---Duas perguntas com relaçao
+1-depis de uma chama exit,oq uma chamada exit faz?
+Resposnta: mudar o expaço de endereçamento do proceosso para auilo que eu realgment quero executar, 
+
+2-se eu der um wait no pai baseado no novo endereçamento vai funcionar?
+Resposta:Vai
+
+
+oq é o I/O
+
+cpu osiosa é ruim, quanto mais imutavel possivel melhro
+
+
+
+
+
+

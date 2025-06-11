@@ -1,0 +1,24 @@
+Duas perpectivas em so (importante e tem nos slides)
+
+Quanod surgiu o conceito de hardware e o softeare
+
+time-sharing (semsação de paralelismo)
+
+lidar com gargalo de pc coisas kasi lentos para mais rapitdas
+estudar mecanismos motivaççao e interrupjçoes
+ver mecanismos que exoneram a cpu de trabalho
+
+estudar os modos da cpu
+
+
+buffering faz a intermidiaç~ça entre caras com velocidades diferentes
+
+caching fa os dados mais assessaveis em um lugar mais rapido
+
+sistema operacinal com carinum monolitico ( oposto é microcarnium, pode ter problemas se segurança)
+estrutura modular
+
+API
+
+
+

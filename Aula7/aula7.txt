@@ -1,0 +1,35 @@
+inanidade  = dar prioridade para uqem sstá mais tempo esperando
+
+prioridade estatica, pode gerar inanição
+
+Round robin , espera circular
+fila fifo
+se for não prenpitivo nao te um bom tempo medio de resposta
+
+
+Processo	PI0 t0		PI1 t1		PI2 t2		PI3	
+A		1   6		     4		     6
+B		1   9		     4		     4
+C		1   4		     4		     2
+
+  A   B  C   C   D   C  D
+|---|--|---|---|---|--|--|
+0   3  5   8   11  14 16 18
+
+FIFO 
+
+TMR	(3 + 2 + 11 + 8)/4 = 24 / 4 = 6
+
+
+
+TME ( 0 + 0 + 3 + 3) / 4 = 6 / 4 = 1,5
+
+APPROXIMATION ARREDONDA
+
+pipes sobre ocmunicaççao entre processo
+
+11
+
+iss (assembly)
+syscall
+biblioteca

@@ -1,0 +1,66 @@
+A partir da rotina main descrita a seguir;
+
+
+int main(int argc, char* argv[])
+{
+
+ 
+  while(1)   
+  return 0;
+
+
+}
+
+
+
+faça:
+
+Um procedimento para contar o número de vezes que o usuário enviou o sinal SIGINT para o processo em execução. 
+Pressionar Ctl-C no teclado envia esse sinal. Quando o processo recebe o sinal SIGTSTP (Ctl-Z), 
+ele deve imprimir no terminal o número de sinais SIGINT que recebeu. Depois de receber 3 sinais SIGINT, 
+o programa deve perguntar se o usuário deseja sair do programa. Se o usuário não responder em 20 segundos, 
+um sinal SIGALRM deve forçar a saída do programa.
+
+Faça o programa de acordo com o exemplo de saída a seguir:
+
+
+bash> ./ex
+    ^C^C^C
+    Realmente deseja sair? [Y/n]: n
+
+    Continuando...
+    ^C^Z
+
+    Você apertou Ctl-C '1' vezes
+
+    ^C^Z
+
+    Você apertou Ctl-C '2' vezes
+
+    ^C
+    Realmente deseja sair? [Y/n]: n
+
+    Continuando...
+    ^C^C^C
+    Realmente deseja sair? [Y/n]:
+    Demorou muito para responder. Saindo......
+
+----------------------------------------------------------------------------------------------
+
+Páginas de referência para posix signals
+
+https://dsa.cs.tsinghua.edu.cn/oj/static/unix_signal.html
+
+http://faculty.kutztown.edu/spiegel/CSc552/POSIX%20Signals.html
+
+https://man7.org/linux/man-pages/man2/signal.2.html
+
+
+Dica:
+
+Para os 20 sec alarme, se o cara digitar não dispara o alarme com parametro 0
+
+Não usar stdio, converter o numeor com \0
+
+Na prova pode ter outro sinal (SIGINT)
+
