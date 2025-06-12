@@ -1,0 +1,21 @@
+mecanismo de interrupçãi, a cpu espera i io (fazendo outra coisa)
+
+DMA?
+
+quak i problema do dma?
+A cpu cinsegue manipular oir endereli logico, dma só o fisico, então tem que traduzie da cpu para a dma
+
+slkets é dispónibilizar portas para fazer processos via rede
+
+drivers
+    kernel
+    sick -  ir direto ao bloco que vc quer (aula16)
+    
+
+drivers quando instalados fazem parte do kernel
+
+net devise são subsistemas pois nçao tem compatibilidade com subarquivos pq não conseguem ler a pilha pip(não sei se escrevi certp)
+
+iq é uma io, programada, dms, por interrupção, oq é uma io prgogramada por pseudo arquivo
+
+
