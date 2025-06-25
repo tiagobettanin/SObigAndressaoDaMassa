@@ -80,6 +80,46 @@ ESTRUTURA Processo:
     tempo_primeira_resposta     // Momento da primeira execução - tempo_chegada
 FIM_ESTRUTURA
 
+// --- LEITURA DOS DADOS DO ARQUIVO ---
+ABRIR arquivo.txt PARA LEITURA
+
+LINHA_1 = LER_LINHA(arquivo.txt) // Ex: "Processo    A   B   C   D   E   F   G   H   I   J"
+LINHA_2 = LER_LINHA(arquivo.txt) // Ex: "Tempo      10  11  12  13  14  15  16  17  18  19"
+LINHA_3 = LER_LINHA(arquivo.txt) // Ex: "Chegada     0   1   2   3   4   5   6   7   8   9"
+LINHA_4 = LER_LINHA(arquivo.txt) // Ex: "Prioridade  0   0   0   0   0   0   0   0   0   0"
+
+FECHAR arquivo.txt
+
+// --- PROCESSAMENTO DOS DADOS ---
+processos_ids = PARSE_IDS(LINHA_1)         // ["A", "B", ..., "J"]
+tempos_execucao = PARSE_NUMS(LINHA_2)      // [10, 11, ..., 19]
+tempos_chegada = PARSE_NUMS(LINHA_3)       // [0, 1, ..., 9]
+// Prioridades podem ser ignoradas se não usadas
+
+lista_de_processos = []
+PARA i DE 0 ATÉ tamanho(processos_ids)-1:
+    p = Processo()
+    p.id = processos_ids[i]
+    p.tempo_chegada = tempos_chegada[i]
+    p.tempo_execucao_total = tempos_execucao[i]
+    p.tempo_restante = p.tempo_execucao_total
+    p.tempo_primeira_resposta = NULO
+    lista_de_processos.adicionar(p)
+FIM_PARA
+
+// --- EXECUTA OS DOIS ALGORITMOS ---
+PARA CADA tipo_algoritmo EM ["SJF_PREEMPTIVO", "ROUND_ROBIN"]:
+    SE tipo_algoritmo == "ROUND_ROBIN":
+        quantum = 5
+    SENAO:
+        quantum = NULO
+    FIM_SE
+
+    simular_escalonador(lista_de_processos, tipo_algoritmo, quantum)
+FIM_PARA
+
+// ...restante do pseudocódigo permanece igual...
+
 FUNÇÃO simular_escalonador(lista_de_processos, tipo_algoritmo, quantum):
 
     // --- 1. INICIALIZAÇÃO ---
