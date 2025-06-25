@@ -1,0 +1,186 @@
+Neste trabalho, os discentes participantes da disciplina Sistemas Operacionais do curso de Engenharia de Computação possuem como tarefa a implementação de um simulador de gerenciador de processos. Nesse sentido, é pretendido que cada dupla implemente um escalonador de processos de curto prazo, alternando os processos de acordo com diversas políticas de escalonamento. O simulador deverá simular a execução dos processos da seguinte maneira:
+
+ 1) O usuário entra com um arquivo ao qual possui diversas programas descritos para execução;
+
+ 2) O simulador lê o arquivo e simula a execução do processo;
+
+ 3) No final da execução da simulação o simulador deverá retornar a linha do tempo como resultado da simulação;
+
+ 4) Além disso, o simulador deverá retornar os Tempos médios e individuais de espera e resposta para cada aplicação;
+
+Os arquivos que recebem as descrições dos processos seguindo o formato:
+
+ 
+Processo	  A	 B	 C	 D	 E	 F	 G	 H	 I	 J
+Tempo	10	11	12	13	14	15	16	17	18	19
+Chegada	0	1	2	3	4	5	6	7	8	9
+Prioridade	 0	0	0	0	0	0	0	0	0	0
+5) O simulador deverá simular a execução de todos os processos e no final exibir um relatório, semelhante ao exemplo a seguir:
+
+Processos na Fila do First Come First Served:
+    A    B    C    D    E    F    G    H    I    J
+
+Tempo de CPU requerida pelos processos:
+   10   11   12   13   14   15   16   17   18   19
+
+Tempo de Chegada dos processos:
+    0    1    2    3    4    5    6    7    8    9
+
+
+
+
+
+LINHA DO TEMPO
+
+|0|−−−−−A−−−−−|10|−−−−−B−−−−−−|21|−−−−−−C−−−−−−|33|−−−−−−D−−−−−−−|46|−−−−−−−E−−−−−−−|60|−−−−−−−F−−−−−−−−|75|−−−−−−−−G−−−−−−−−|91|−−−−−−−−H−−−−−−−−−|108|−−−−−−−−−I−−−−−−−−−|126|−−−−−−−−−J−−−−−−−−−−|145|
+
+
+
+
+
+
+Tempo de Espera de cada processo:
+    A    B    C    D    E    F    G    H    I    J
+    0    9   19   30   42   55   69   84  100  117
+
+
+
+
+Tempo de Resposta de cada processo:
+    A    B    C    D    E    F    G    H    I    J
+   10   20   31   43   56   70   85  101  118  136
+
+
+
+
+Tempo Médio de Resposta: 67.00
+
+
+
+
+Tempo Médio de Espera: 52.50
+
+6) Deverão ser implementadas as seguintes políticas.
+
+SJF preemptivo
+
+Round-Robin (Quantum = 5)
+
+================== Pseudocódigo Revisado ==================
+
+// Estrutura do processo
+ESTRUTURA Processo:
+    id,                         // Identificador do processo
+    tempo_chegada,              // Momento em que o processo chega
+    tempo_execucao_total,       // Tempo total de CPU necessário
+    tempo_restante,             // Quanto tempo ainda falta para terminar
+    tempo_conclusao,            // Momento em que o processo termina
+    tempo_retorno,              // tempo_conclusao - tempo_chegada
+    tempo_espera,               // tempo_retorno - tempo_execucao_total
+    tempo_primeira_resposta     // Momento da primeira execução - tempo_chegada
+FIM_ESTRUTURA
+
+FUNÇÃO simular_escalonador(lista_de_processos, tipo_algoritmo, quantum):
+
+    // --- 1. INICIALIZAÇÃO ---
+    tempo_atual = 0
+    processos_concluidos = 0
+    total_processos = tamanho(lista_de_processos)
+    processo_executando = NULO
+
+    // Estruturas auxiliares para os algoritmos
+    lista_prontos_sjf = Lista()      // Para SJF preemptivo
+    fila_prontos_rr = Fila()         // Para Round-Robin
+
+    // Inicializa campos dos processos
+    PARA CADA p EM lista_de_processos:
+        p.tempo_restante = p.tempo_execucao_total
+        p.tempo_primeira_resposta = NULO
+    FIM_PARA
+
+    // --- 2. LOOP PRINCIPAL DA SIMULAÇÃO ---
+    ENQUANTO processos_concluidos < total_processos:
+
+        // 2.1. Adiciona processos que chegaram à lista/fila de prontos
+        PARA CADA p EM lista_de_processos:
+            SE p.tempo_chegada == tempo_atual:
+                SE tipo_algoritmo == "SJF_PREEMPTIVO":
+                    lista_prontos_sjf.adicionar(p)
+                SENAO SE tipo_algoritmo == "ROUND_ROBIN":
+                    fila_prontos_rr.adicionar(p)
+                FIM_SE
+            FIM_SE
+        FIM_PARA
+
+        // 2.2. Seleciona o próximo processo a executar, se necessário
+        SE processo_executando == NULO:
+            SE tipo_algoritmo == "SJF_PREEMPTIVO":
+                processo_executando = lista_prontos_sjf.remover_menor_tempo_restante()
+            SENAO SE tipo_algoritmo == "ROUND_ROBIN":
+                processo_executando = fila_prontos_rr.remover()
+                quantum_atual = 0
+            FIM_SE
+        FIM_SE
+
+        // 2.3. Preempção no SJF preemptivo
+        SE tipo_algoritmo == "SJF_PREEMPTIVO" E processo_executando != NULO:
+            SE lista_prontos_sjf.tem_processo_com_tempo_menor(processo_executando.tempo_restante):
+                lista_prontos_sjf.adicionar(processo_executando)
+                processo_executando = lista_prontos_sjf.remover_menor_tempo_restante()
+            FIM_SE
+        FIM_SE
+
+        // --- 3. EXECUÇÃO DA UNIDADE DE TEMPO ---
+        SE processo_executando != NULO:
+            // Registrar tempo de primeira resposta
+            SE processo_executando.tempo_primeira_resposta == NULO:
+                processo_executando.tempo_primeira_resposta = tempo_atual - processo_executando.tempo_chegada
+            FIM_SE
+
+            processo_executando.tempo_restante -= 1
+            tempo_atual += 1
+
+            // Controle de quantum para Round-Robin
+            SE tipo_algoritmo == "ROUND_ROBIN":
+                quantum_atual += 1
+            FIM_SE
+
+            // Se o processo terminou
+            SE processo_executando.tempo_restante == 0:
+                processos_concluidos += 1
+                processo_executando.tempo_conclusao = tempo_atual
+                processo_executando.tempo_retorno = processo_executando.tempo_conclusao - processo_executando.tempo_chegada
+                processo_executando.tempo_espera = processo_executando.tempo_retorno - processo_executando.tempo_execucao_total
+                processo_executando = NULO
+            // Preempção por quantum no Round-Robin
+            SENAO SE tipo_algoritmo == "ROUND_ROBIN" E quantum_atual == quantum:
+                fila_prontos_rr.adicionar(processo_executando)
+                processo_executando = NULO
+            FIM_SE
+        SENAO:
+            tempo_atual += 1 // Avança o tempo se não há processo executando
+        FIM_SE
+
+    FIM_ENQUANTO
+
+    // --- 4. CÁLCULO DAS MÉDIAS FINAIS ---
+    soma_tempo_espera = 0
+    soma_tempo_retorno = 0
+    soma_tempo_resposta = 0
+
+    PARA CADA p EM lista_de_processos:
+        soma_tempo_espera += p.tempo_espera
+        soma_tempo_retorno += p.tempo_retorno
+        soma_tempo_resposta += p.tempo_primeira_resposta
+    FIM_PARA
+
+    tempo_medio_espera = soma_tempo_espera / total_processos
+    tempo_medio_retorno = soma_tempo_retorno / total_processos
+    tempo_medio_resposta = soma_tempo_resposta / total_processos
+
+    IMPRIMIR "Resultados para o algoritmo: " + tipo_algoritmo
+    IMPRIMIR "Tempo Médio de Espera: " + tempo_medio_espera
+    IMPRIMIR "Tempo Médio de Retorno: " + tempo_medio_retorno
+    IMPRIMIR "Tempo Médio de Resposta: " + tempo_medio_resposta
+
+FIM_FUNÇÃO
