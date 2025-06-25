@@ -1,0 +1,89 @@
+Aula12
+MEmoria compartilhada
+
+Para um procs assessar serta regial precisa de um tolkien para isso com ponteiro
+
+    O tolkien cria o ponteiro para vincular 
+    area comun para o proceso trocar dado livremente
+    Pode ser necessario gestão
+
+problemas: gestão de corrida(dempednedo d ahora resultados diiferentse), dead lock (algum processo assessa e trava o restantee)
+
+
+!!!!!!!!!!!!!!!!!!!!!não usra n-map, usar system five 
+
+Aula13
+
+produtor x consumidor
+depende de quem executa primeiro , codição de corrida = a ordem de execução de processos depende de quem inicnia
+
+ operaçẽos atomica = determinaão atomicidade (começa a extura  e termina sem niguem poder interromper o porcesso)
+
+
+fregião critica = regiião once cocorre o assess as variares comparitnhladas (codigo), tem que haversincornização com operaçoes atomica(bloquei a aregão critica  edesbroquei apos o uso)]
+
+tecnicas de bloquei
+esse bloqueir normlamente é por hardare mas pode ser por softwaree
+NAÕ
+petenso nãon tem garantia que funcione
+hardware não é todos que tem 
+SIM
+semaforo binario e não binario
+
+
+
+
+solução de peterçon
+
+Aula14
+diferença de codigo obejto e executabel - 
+
+alocaçao de memoria: segmekntaçãol fragmentação
+fragmentação externa é gerada por segmekntação
+
+pagnaç~çao resolve a fragmentação externa, os processos ficam todos com o mesmo tamnho, fragmentação interna é quando sobra espaço nessas lacunas
+da paginação
+
+mmu pega o endereço logico e mukda para endereço fisico, tlb tabela de locação para fretne
+
+
+frames é a fisica paginas é a virutal - frmaes são fixisos mas a paginha pode estar em difetnees frames (frames são garagens e paginas são carros)
+
+Aula16
+Definiçao de diretorio
+
+Grafo acíclico
+    soft e hard link
+
+Alocação de blocos
+    alocação encadeada - se eu perco o 5 eu perco o resto
+
+Fat na prova ele dá um atabel a e fala para representar 
+
+Inode a primera azul é de indie
+ 
+ ufs
+ organização de diretorios
+
+Aula 17
+ mecanismo de interrupçãi, a cpu espera i io (fazendo outra coisa)
+
+DMA?
+
+quak i problema do dma?
+A cpu cinsegue manipular oir endereli logico, dma só o fisico, então tem que traduzie da cpu para a dma
+
+slkets é dispónibilizar portas para fazer processos via rede
+
+drivers
+    kernel
+    sick -  ir direto ao bloco que vc quer (aula16)
+    
+
+drivers quando instalados fazem parte do kernel
+
+net devise são subsistemas pois nçao tem compatibilidade com subarquivos pq não conseguem ler a pilha pip(não sei se escrevi certp)
+
+iq é uma io, programada, dms, por interrupção, oq é uma io prgogramada por pseudo arquivo
+
+
